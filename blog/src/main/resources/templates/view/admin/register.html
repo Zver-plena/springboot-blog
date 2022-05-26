@@ -1,0 +1,39 @@
+<!--
+ * @Autor: Zver
+ * @Date: 2022-03-23 19:08:52
+ * @LastEditTime: 2022-05-16 20:35:56
+-->
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/demo01.css}" />
+    <title>Form Input Wave</title>
+</head>
+<body>
+<div class="container">
+    <h1>注册</h1>
+    <p th:text="${msg}" style="color: #f35454"></p>
+    <form th:action="@{/user/register}" method="post">
+        <div class="form-control">
+            <input type="text" name="name" required>
+            <label>友情提示你：用户名</label>
+
+        </div>
+
+        <div class="form-control">
+            <input type="password"  name="password"required>
+            <label>友情提示：密码</label>
+        </div>
+        <div class="form-control">
+            <input type="text"  name="email"required>
+            <label>友情提示：邮箱</label>
+        </div>
+        <button class="btn" type="submit" >注册</button>
+
+    </form>
+</div>
+<script th:src="@{/js/demo01.js}"></script>
+</body>
+</html>

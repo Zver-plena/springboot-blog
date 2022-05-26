@@ -1,0 +1,71 @@
+<!--
+ * @Autor: Zver
+ * @Date: 2022-05-18 07:55:41
+ * @LastEditTime: 2022-05-18 10:04:01
+-->
+<html>
+<head xmlns:th="http://www.thymeleaf.org">
+    <div th:include="common::css"></div>
+
+</head>
+<body>
+
+<div th:replace="common::nav"></div>
+<div class="m-container-small m-padded-big">
+    <div class="ui container">
+        <form th:action="@{/category/add}" class="ui  form " th:method="post">
+            <div class="field">
+                <div class="ui left labeled input">
+                    <div class="ui selection compact">
+                        <button class="ui teal basic button">新增</button>
+                    </div>
+                    <input type="text" name="name" placeholder="分类名称">
+                </div>
+            </div>
+
+        </form>
+
+        <table class="ui celled center aligned table">
+            <thead>
+                <th>ID</th>
+                <th>名称</th>
+                <th>操作</th>
+            </thead>
+            <tbody >
+                <tr th:each="category,status : ${categories}">
+                    <td th:text="${status.index}+1">1</td>
+                    <td th:text="${category.name}">笔记</td>
+                    <td>
+                        <a  class="ui mini teal basic button">编辑
+                        </a>
+                        <a th:href="@{/category/delete(id=${category.id})}"
+                           class="ui mini red basic button">删除
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <th colspan="5">
+                    <div class="ui right floated pagination menu">
+                        <a class="icon item">
+                            <i class="left chevron icon"></i>
+                        </a>
+                        <a class="icon item">
+                            <i class="right chevron icon"></i>
+                        </a>
+                    </div>
+                </th>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+
+
+
+<div th:replace="common::footer"></div>
+
+<div th:include="common::script"></div>
+</body>
+</html>

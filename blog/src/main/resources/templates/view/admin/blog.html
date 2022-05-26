@@ -1,0 +1,100 @@
+<!--
+ * @Autor: Zver
+ * @Date: 2022-05-18 07:55:41
+ * @LastEditTime: 2022-05-18 11:50:20
+-->
+<html>
+
+<head xmlns:th="http://www.thymeleaf.org">
+    <div th:include="common::css"></div>
+</head>
+
+<body>
+<div th:replace="Common::nav"></div>
+
+<div class="m-container-small m-padded-big">
+    <div class="ui container">
+        <form action="#" class="ui segment form " method="post">
+            <div class="inline fields">
+                <div class="field">
+                    <input type="text" name="title" placeholder="标题">
+                </div>
+                <div class="field">
+                    <div class="ui selection dropdown">
+                        <div class="default text">分类</div>
+                        <input type="hidden" name="type">
+                        <i class="dropdown icon"></i>
+                        <div class="menu">
+                            <div class="item" data-value="1">
+                                java
+                            </div>
+                            <div class="item" data-value="2">
+                                c
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <button class="ui teal basic button">搜索</button>
+                </div>
+            </div>
+        </form>
+        <form th:action="@{/article.html}" class="ui  form " th:method="get">
+            <div class="field">
+                <button class="ui teal basic button">创建</button>
+            </div>
+        </form>
+        <table class="ui center aligned table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>标题</th>
+                <th>类型</th>
+                <th>更新时间</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody th:each="page,status: ${pages}">
+            <td th:text="${status.index}+1">1</td>
+            <td th:text="${page.title}">一节课学习c</td>
+            <td th:text="${page.categoryName}">笔记</td>
+            <td th:text="${page.createTime}">2022-10-02 09:42:30</td>
+            <td>
+                <a th:href="@{/edit.html(pageId=${page.id})}"
+                   class="ui mini teal basic button">编辑
+                </a>
+                <a th:href="@{/page/delete(pageId=${page.id})}" class="ui mini red basic button">删除
+                </a>
+            </td>
+            </tbody>
+            <tfoot>
+            <tr>
+                <th colspan="5">
+                    <div class="ui right floated pagination menu">
+                        <a class="icon item">
+                            <i class="left chevron icon"></i>
+                        </a>
+                        <a class="icon item">
+                            <i class="right chevron icon"></i>
+                        </a>
+                    </div>
+                </th>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+
+
+<br>
+<br>
+<br>
+<!-- inverted 反转颜色 -->
+<!-- vertical 垂直布局 -->
+<!-- segment 部分 -->
+<div th:replace="common::footer"></div>
+
+<div th:include="common::script"></div>
+</body>
+
+</html>

@@ -1,0 +1,111 @@
+<!--
+ * @Autor: Zver
+ * @Date: 2022-05-18 07:55:41
+ * @LastEditTime: 2022-05-18 12:28:37
+-->
+<html>
+
+<head>
+    <div th:include="common::css"></div>
+</head>
+
+<body>
+    <div th:replace="common::nav"></div>
+    <div class="ui container m-padded-big">
+        <div class="ui container m-container">
+            <form th:action="@{/page/edit(pageId=${page.id})}" class="ui form"  th:method="post" >
+                <div class="field">
+                    <div class="ui left labeled input">
+                        <div class="ui selection compact dropdown">
+                            <input type="hidden">
+                            <i class="dropdown icon"></i>
+                            <div class="default text">类型</div>
+                        </div>
+                        <input type="text" name="title" placeholder="标题"
+                               th:value="${page.title}">
+                    </div>
+                </div>
+                <div class="field">
+                    <div id="md-content">
+                        <textarea name="content" th:if="${page}"  th:text="${page.content}"
+                                  cols="30" rows="10"
+                                  placeholder="输入你的博客内容，我谢谢你。。。。" style="display:
+                        none;">
+                        ### 你试试看效果看看
+                            ajsdkasjkdasj
+                        </textarea>
+                    </div>
+                </div>
+                <div class="two fields">
+                    <div class="field">
+                        <div class="ui left labeled input">
+                            <label  class="ui compact teal basic label">标签</label>
+                            <div class="ui fluid multiple search selection dropdown">
+                                <input type="hidden" name="tag">
+                                <i class="dropdown icon"></i>
+                                <div class="default text">默认</div>
+                                <div class="menu">
+                                    <div class="item">java</div>
+                                    <div class="item">c++</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui left labeled input">
+                            <label class="ui compact teal basic label">分类</label>
+                            <div class="ui selection dropdown">
+                                <input type="hidden" name="categoryId" value="2">
+                                <i class="dropdown icon"></i>
+                                <div class="default text"  >默认</div>
+                                <div class="menu" >
+                                    <div th:each="category : ${categories}" class="item"
+                                         th:data-value="${category.id}">[[${category
+                                        .name}]]</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui right aligned container">
+                    <button type="button" class="ui button"  onclick="window.history.go(-1)">返回</button>
+                    <button class="ui secondary button" >保存更改</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- inverted 反转颜色 -->
+    <!-- vertical 垂直布局 -->
+    <!-- segment 部分 -->
+    <div th:replace="common::footer"></div>
+    <div th:include="common::script"></div>
+    <script type="text/javascript">
+        var contentEditor;
+        $(function() {
+            contentEditor = editormd({
+                id      : "md-content",
+                width   : "100%",
+                height  : "700px",
+                path    : "/lib/editormd/lib/"
+            });
+        });
+    </script>
+</body>
+
+</html>
